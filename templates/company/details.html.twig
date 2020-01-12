@@ -17,6 +17,13 @@
         {{ company.description }}
     </em>
 
+    {% if company.url == null %}
+    {% else %}
+        <h2 class="h3 mb-3 font-weight-normalurl">URL</h2>
+        <em>
+            {{ company.url }}
+        </em>
+    {% endif %}
 
     <h2 class="h3 mb-3 font-weight-normaldescription">Créneaux</h2>
     

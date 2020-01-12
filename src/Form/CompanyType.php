@@ -6,6 +6,7 @@ use App\Entity\Company;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class CompanyType extends AbstractType
 {
@@ -14,6 +15,9 @@ class CompanyType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
+            ->add('url', UrlType::class, [
+                'required' => false,
+            ])
         ;
     }
 

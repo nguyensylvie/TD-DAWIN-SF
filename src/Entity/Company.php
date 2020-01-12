@@ -33,6 +33,11 @@ class Company
      */
     private $slots;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $url;
+
     public function __construct()
     {
         $this->slots = new ArrayCollection();
@@ -94,6 +99,18 @@ class Company
                 $slot->setCompany(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }
