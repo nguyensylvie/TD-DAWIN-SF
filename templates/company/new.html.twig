@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle entreprise{% endblock %}
+{% block title %}
+    {% if is_granted('ROLE_USER') %}
+        {% if is_granted('ROLE_ADMIN') %}
+        Nouvelle entreprise
+        {% endif %}
+    {% endif %}
+{% endblock %}
 
 {% block body %}
-    <h1>Ajouter une entreprise</h1>
+    {% if is_granted('ROLE_USER') %}
+        {% if is_granted('ROLE_ADMIN') %}
+        <h1>Ajouter une entreprise</h1>
 
-    {{ include('company/_form.html.twig') }}
+        {{ include('company/_form.html.twig') }}
 
-    <a href="{{ path('company_index') }}">Retour à la liste</a>
+        <a href="{{ path('company_index') }}">Retour à la liste</a>
+        {% endif %}
+    {% endif %}
 {% endblock %}

@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Entreprises{% endblock %}
+{% block title %}
+    {% if is_granted('ROLE_USER') %}
+    Entreprises
+    {% endif %}
+{% endblock %}
 
 {% block body %}
+    {% if is_granted('ROLE_USER') %}
     <h1>Entreprises</h1>
 
     <table class="table table-striped">
@@ -22,7 +27,9 @@
                 </td>
                 <td>
                     <a href="{{ path('company_details', {'id': company.id}) }}">détails</a>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('company_edit', {'id': company.id}) }}">éditer</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -33,5 +40,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('company_new') }}">Ajouter</a>
+        {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('company_new') }}">Ajouter</a>
+        {% endif %}
+    {% endif %}
 {% endblock %}

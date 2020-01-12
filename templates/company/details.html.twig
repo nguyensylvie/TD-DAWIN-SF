@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ company.name }}{% endblock %}
+{% block title %}
+    {% if is_granted('ROLE_USER') %}
+    {{ company.name }}
+    {% endif %}
+{% endblock %}
 
 {% block body %}
+    {% if is_granted('ROLE_USER') %}
     <h1 class="h3 mb-3 font-weight-normal">
         Entreprise "{{ company.name }}"
     </h1>
@@ -31,5 +36,8 @@
 
     <a href="{{ path('company_index') }}">&laquo; retour à la liste</a>
 
-    {{ include('company/_delete_form.html.twig') }}
+        {% if is_granted('ROLE_ADMIN') %}
+        {{ include('company/_delete_form.html.twig') }}
+        {% endif %}
+    {% endif %}
 {% endblock %}

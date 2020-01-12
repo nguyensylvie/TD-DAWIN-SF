@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formations{% endblock %}
+{% block title %}
+    {% if is_granted('ROLE_ADMIN') %}
+    Formations
+    {% endif %}
+{% endblock %}
 
 {% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
     <h1>Ajouter une formation</h1>
 
     {{ include('training/_form.html.twig') }}
 
     <a href="{{ path('training_index') }}">retour à la liste</a>
+    {% endif %}
 {% endblock %}
