@@ -38,9 +38,15 @@ class Company
      */
     private $url;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Training", inversedBy="companies")
+     */
+    private $training;
+
     public function __construct()
     {
         $this->slots = new ArrayCollection();
+        $this->training = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,6 +117,32 @@ class Company
     public function setUrl(?string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Training[]
+     */
+    public function getTraining(): Collection
+    {
+        return $this->training;
+    }
+
+    public function addTraining(Training $training): self
+    {
+        if (!$this->training->contains($training)) {
+            $this->training[] = $training;
+        }
+
+        return $this;
+    }
+
+    public function removeTraining(Training $training): self
+    {
+        if ($this->training->contains($training)) {
+            $this->training->removeElement($training);
+        }
 
         return $this;
     }

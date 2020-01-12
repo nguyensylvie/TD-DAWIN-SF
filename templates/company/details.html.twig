@@ -21,9 +21,17 @@
     {% else %}
         <h2 class="h3 mb-3 font-weight-normalurl">URL</h2>
         <em>
-            {{ company.url }}
+            <a href="{{ company.url }}">{{ company.url }}</a>
         </em>
     {% endif %}
+
+    <h2 class="h3 mb-3 font-weight-normalformation">Formation(s) intéressée(s)</h2>
+    <em>
+        <ul>{% for trainings in company.training %}
+            <li>{{ trainings.name }}</li>
+        {% endfor %}
+        </ul>
+    </em>
 
     <h2 class="h3 mb-3 font-weight-normaldescription">Créneaux</h2>
     
