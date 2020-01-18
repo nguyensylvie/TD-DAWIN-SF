@@ -40,13 +40,18 @@
     <div class="row">
     {% for slot in company.slots %}
         {% if slot.student == null %}
-        <div class="col-sm-2 bg-success slot m-1 text-white">
+        <button class="col-sm-2 bg-success slot m-1 text-white">
             {{ slot.time }} 
-        </div>
+        </button>
         {% else %}
         <div class="col-sm-2 bg-danger slot m-1 text-white">
             {{ slot.time }} 
-            {{ slot.student.name }} 
+            {% if app.user.name == slot.student.name %}
+                {{ slot.student.name }} 
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                {{ slot.student.name }} 
+            {% endif %}
         </div>
         {% endif %}
     {% endfor %}
