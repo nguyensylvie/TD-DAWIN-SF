@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Entity\Slot;
+use App\Entity\User;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -124,5 +125,17 @@ class CompanyController extends AbstractController
         }
 
         return $this->redirectToRoute('company_index');
+    }
+
+    // Affecte un créneau pour un étudiant
+    public function affectSlots(Slot $slot)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = new User();
+        $slot->setStudent($user)
+             ->getId();  
+        $entityManager->persist($slot);
+        $entityManager->persist($user);
+        $entityManager->flush();
     }
 }

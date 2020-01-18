@@ -40,9 +40,9 @@
     <div class="row">
     {% for slot in company.slots %}
         {% if slot.student == null %}
-        <button class="col-sm-2 bg-success slot m-1 text-white">
+        <a href="#" class="col-sm-2 btn-success slot m-1 text-white affectSlot">
             {{ slot.time }} 
-        </button>
+        </a>
         {% else %}
         <div class="col-sm-2 bg-danger slot m-1 text-white">
             {{ slot.time }} 
