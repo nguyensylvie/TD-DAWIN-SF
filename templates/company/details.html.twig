@@ -39,12 +39,16 @@
     {% if company.slots|length %}
     <div class="row">
     {% for slot in company.slots %}
-    <div class="col-sm-2 bg-success slot m-1 text-white">
-        {{ slot.time }} 
-        {% if slot.student != null %}
+        {% if slot.student == null %}
+        <div class="col-sm-2 bg-success slot m-1 text-white">
+            {{ slot.time }} 
+        </div>
+        {% else %}
+        <div class="col-sm-2 bg-danger slot m-1 text-white">
+            {{ slot.time }} 
             {{ slot.student.name }} 
+        </div>
         {% endif %}
-    </div>
     {% endfor %}
     </div>
     {% else %}
