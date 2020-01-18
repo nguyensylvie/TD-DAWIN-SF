@@ -40,7 +40,10 @@
     <div class="row">
     {% for slot in company.slots %}
     <div class="col-sm-2 bg-success slot m-1 text-white">
-        {{ slot.time }}
+        {{ slot.time }} 
+        {% if slot.student != null %}
+            {{ slot.student.name }} 
+        {% endif %}
     </div>
     {% endfor %}
     </div>

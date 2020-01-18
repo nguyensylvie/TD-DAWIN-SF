@@ -101,4 +101,9 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
     {
         return $this->urlGenerator->generate('app_login');
     }
+
+    public function getTraining($training): ?string
+    {
+        return $training['training'];
+    }
 }

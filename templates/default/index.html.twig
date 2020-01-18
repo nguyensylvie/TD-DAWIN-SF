@@ -11,5 +11,30 @@
 <h3 class="post-subtitle">
     A l'aide de cette plateforme, organisez votre visite à l'événement, consultez les
     entreprises qui seront présentes, et réservez des créneaux pour les rencontrer!
-</h3>
+</h3><br/>
+
+{% if app.user %}
+    <h3>Ne manquez pas vos rendez-vous !</h3>
+    <div class="row">
+        <div class="col-4">
+            <h4>Creneaux :</h4>
+        </div>
+        <div class="col-4">
+            <h4>Entreprises :</h4>
+        </div>
+    </div>
+    {% if app.user.slots != null %}
+        {% for slot in app.user.slots %}
+            <div class="row">
+                <div class="col-4">
+                    {{ slot.time }}
+                </div>
+                <div class="col-4">
+                    {{ slot.company.name }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endif %}
+
 {% endblock %}
