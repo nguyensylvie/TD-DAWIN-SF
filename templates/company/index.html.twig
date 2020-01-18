@@ -20,8 +20,8 @@
         </thead>
         <tbody>
         {% for company in companies %}
-            {% for trainings in company.training %}
-                {% if app.user.training.name == trainings.name %}
+            {# {% for trainings in company.training %}
+                {% if app.user.training.name == trainings.name %} #}
                 <tr>
                     <td>{{ company.name }}</td>
                     <td>
@@ -34,21 +34,8 @@
                         {% endif %}
                         </td>
                     </tr>
-                {% else %}
-                <tr style="opacity:0.5">
-                    <td>{{ company.name }}</td>
-                    <td>
-                        <em>{{ company.description }}</em>
-                    </td>
-                    <td>
-                        <a href="{{ path('company_details', {'id': company.id}) }}">détails</a>
-                        {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('company_edit', {'id': company.id}) }}">éditer</a>
-                        {% endif %}
-                        </td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
+                {# {% endif %}
+            {% endfor %} #}
     {% else %}
             <tr>
                 <td colspan="4">aucune entreprise</td>
