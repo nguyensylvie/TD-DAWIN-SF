@@ -27,9 +27,10 @@
 
     <h2 class="h3 mb-3 font-weight-normalformation">Formation(s) intéressée(s)</h2>
     <em>
-        <ul>{% for trainings in company.training %}
+        <ul>
+            {% for trainings in company.training %}
             <li>{{ trainings.name }}</li>
-        {% endfor %}
+            {% endfor %}
         </ul>
     </em>
 

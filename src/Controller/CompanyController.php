@@ -39,37 +39,22 @@ class CompanyController extends AbstractController
         $slotsDuration = getenv('SLOTS_DURATION');
 
         // TODO: Générer les créneaux libres et les associer aux entreprises  
-        // $dateStart = date_create_from_format('H:i', $slotsStart);
-        // $start = date_format($dateStart, 'H:i');
-
-        // $dateEnd = date_create_from_format('H:i', $slotsEnd);
-        // $end = date_format($dateEnd, 'H:i');
-
-        // $dateDuration = date_create_from_format('i', $slotsDuration);
-        // $duration = date_format($dateDuration, 'H:i');
-
-
-        // $dateStart = date('H:i', strtotime($slotsStart));
-        // $dateEnd = date('H:i', strtotime($slotsEnd));
-        // $dateDuration = date('i', strtotime($slotsDuration));
-
         $entityManager = $this->getDoctrine()->getManager();
-        $slot = new Slot();
-        $slot->setCompany($company)
-             ->setStudent(null);
 
         $dtStart = date_create($slotsStart);
         $dtEnd = date_create($slotsEnd);
-        $dtDuration = date_create($slotsDuration);
+        //$dtDuration = date_create($slotsDuration);
 
         foreach (new \DatePeriod($dtStart, \DateInterval::createFromDateString('15 minutes'), $dtEnd) as $dt) {
             $date = strval($dt->format('H:i'));
-            $slot->setTime($date);
+            $slot = new Slot();
+            $slot->setCompany($company)
+                 ->setStudent(null)
+                 ->setTime($date);
             $company->addSlot($slot);
-            $company->getSlots();
+            $entityManager->persist($slot);
+            $entityManager->persist($company);
         }
-        $entityManager->persist($company);
-        $entityManager->persist($slot);
         $entityManager->flush();
     }
 
